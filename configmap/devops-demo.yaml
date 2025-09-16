@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: devops-demo-pod
+spec:
+  containers:
+    - name: demo-docker-container
+      image: alpine
+      command: ["sleep", "3600"]
+      env:
+        - name: levels
+          valueFrom:
+            configMapKeyRef:
+              name: devops-demo
+              key: levels
+
+        - name: Level_Properties
+          valueFrom:
+             configMapKeyRef:
+               name: devops-demo
+               key: level.properties
+
+      volumeMounts:
+      - name: config
+        mountPath: "/config"
+        readOnly: true
+
+  volumes:
+  # You set volumes at the Pod level, then mount them into containers inside that Pod
+    - name: config
+      configMap:
+      # Provide the name of the ConfigMap you want to mount.
+        name: devops-demo
+      # An array of keys from the ConfigMap to create as files
+        items:
+        - key: "level.properties"
+          path: "level.properties"
+      
+        
