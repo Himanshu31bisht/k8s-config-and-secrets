@@ -1,8 +1,8 @@
-k8s-config-and-secrets
+# k8s-config-and-secrets
 
 This repository contains example Kubernetes manifests to demonstrate how to use ConfigMaps, Secrets, and Persistent Volume Claims (PVCs) together with a MySQL deployment.
 
-📂 Project Structure
+# 📂 Project Structure
 k8s-config-and-secrets/
 ├── configmap/                  # Example ConfigMaps (if any)
 │   └── ...yaml
@@ -13,7 +13,7 @@ k8s-config-and-secrets/
 │   └── service.yaml            # Service to expose MySQL
 └── README.md
 
-✅ Features / What You’ll Learn
+# ✅ Features / What You’ll Learn
 
 🔐 Secrets → Securely store sensitive data (e.g., MySQL root password).
 
@@ -23,7 +23,7 @@ k8s-config-and-secrets/
 
 🛡 Best Practices → Avoid hardcoding passwords, keep credentials out of plain YAML, use Kubernetes resources properly.
 
-🚀 How to Use
+# 🚀 How to Use
 1. Clone the Repo
 git clone https://github.com/Himanshu31bisht/k8s-config-and-secrets.git
 cd k8s-config-and-secrets/mysql_k8s
