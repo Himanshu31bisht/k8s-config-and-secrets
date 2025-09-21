@@ -1,91 +1,72 @@
-# k8s-config-and-secrets
+k8s-config-and-secrets
 
-This repository contains example Kubernetes manifests to demonstrate how to use **ConfigMaps**, **Secrets**, and **Persistent Volume Claims (PVCs)** together with a MySQL deployment.  
+This repository contains example Kubernetes manifests to demonstrate how to use ConfigMaps, Secrets, and Persistent Volume Claims (PVCs) together with a MySQL deployment.
 
----
-
-## 📂 Project Structure
-
+📂 Project Structure
 k8s-config-and-secrets/
-├── configmap/ # (if you have any ConfigMap examples)
-│ └── ...yaml
-├── mysql_k8s/ # MySQL deployment folder
-│ ├── secret.yml # Holds secret (password) for MySQL root user
-│ ├── persistentVolumeClaim.yaml # PVC to persist MySQL data
-│ ├── deployment.yaml # MySQL deployment manifest
-│ └── service.yaml # Service to expose MySQL
+├── configmap/                  # Example ConfigMaps (if any)
+│   └── ...yaml
+├── mysql_k8s/                  # MySQL deployment resources
+│   ├── secret.yml              # Secret for MySQL root user password
+│   ├── persistentVolumeClaim.yaml # PVC for persisting MySQL data
+│   ├── deployment.yaml         # MySQL Deployment
+│   └── service.yaml            # Service to expose MySQL
 └── README.md
 
-yaml
-Copy code
+✅ Features / What You’ll Learn
 
----
+🔐 Secrets → Securely store sensitive data (e.g., MySQL root password).
 
-## ✅ What You’ll Learn / Features
+💾 PersistentVolumeClaim (PVC) → Ensure database data persists across pod restarts / rescheduling.
 
-- How to create and use **Secrets** in Kubernetes to securely store sensitive data (e.g., MySQL root password).  
-- How to create a **PersistentVolumeClaim (PVC)** to ensure database data persists across pod restarts / rescheduling.  
-- How to deploy **MySQL** using a Deployment + Service + volume mounts + secret injection.  
-- Best practices: avoid hardcoding passwords, keep credentials out of plain YAML, use Kubernetes resources properly.
+🐬 MySQL Deployment → Using Deployment + Service + volume mounts + secret injection.
 
----
+🛡 Best Practices → Avoid hardcoding passwords, keep credentials out of plain YAML, use Kubernetes resources properly.
 
-## 🚀 How to Use
+🚀 How to Use
+1. Clone the Repo
+git clone https://github.com/Himanshu31bisht/k8s-config-and-secrets.git
+cd k8s-config-and-secrets/mysql_k8s
 
-Here is a step-by-step guide to run the setup:
+2. (Optional) Encode Your Password
 
-1. Clone the repo  
-   ```bash
-   git clone https://github.com/Himanshu31bisht/k8s-config-and-secrets.git
-   cd k8s-config-and-secrets/mysql_k8s
-(Optional) Encode your secret/password in Base64 (if using secret.yml that requires encoding)
+If your secret.yml expects Base64 encoding:
 
-bash
-Copy code
 echo -n "your-password-here" | base64
-Apply the Secret manifest
 
-bash
-Copy code
+3. Apply the Manifests
+# Apply Secret
 kubectl apply -f secret.yml
-Create the PersistentVolumeClaim
 
-bash
-Copy code
+# Apply PVC
 kubectl apply -f persistentVolumeClaim.yaml
-Deploy MySQL
 
-bash
-Copy code
+# Deploy MySQL
 kubectl apply -f deployment.yaml
-Create the Service
 
-bash
-Copy code
+# Expose MySQL
 kubectl apply -f service.yaml
-Check that everything is working
 
-bash
-Copy code
+4. Verify Deployment
 kubectl get pods
 kubectl get svc
 kubectl describe pod <mysql-pod-name>
 
-⚠️ Things to Note / Troubleshooting
-Make sure the namespace is correct (if you're using one).
+⚠️ Troubleshooting
 
-Ensure YAML indentation is correct — even one space off can cause errors.
+✅ Namespace → Ensure you are applying manifests in the correct namespace.
 
-Secret values must be Base64‑encoded, unless you use kubectl create secret … commands which handle that for you.
+✅ YAML Indentation → Even a single space mistake can break the manifest.
 
-If MySQL pod doesn’t start, check logs with:
+✅ Secrets → Values must be Base64-encoded (unless created using kubectl create secret command).
 
-bash
-Copy code
-kubectl logs <pod-name>
+✅ Pod Issues → If MySQL pod doesn’t start, check logs:
 
-
+kubectl logs <mysql-pod-name>
 
 👤 About Me
-Hi, I’m Himanshu! I’m learning Kubernetes, cloud-native, and DevOps practices, and this repo is part of my “learning by doing” journey. Feedback is welcome!
 
+Hi, I’m Himanshu Bisht 👋
+I’m learning Kubernetes, Cloud-Native, and DevOps practices.
+This repo is part of my learning-by-doing journey.
+💡 Feedback and suggestions are always welcome!
